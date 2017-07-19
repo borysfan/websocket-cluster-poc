@@ -1,0 +1,38 @@
+node_1:
+   volumes:
+    - $PWD/webapps:/usr/local/spring
+   expose:
+    - "8009"
+   ports:
+    - "8081:8080"
+   image: openjdk:8-jre
+   container_name: "node_1"
+   links:
+    - activemq
+   tty: true
+   command: bash -c "cd /usr/local/spring && java -jar *.jar"
+node_2:
+   volumes:
+    - $PWD/webapps:/usr/local/spring
+   expose:
+    - "8009"
+   ports:
+    - "8082:8080"
+   image: openjdk:8-jre
+   container_name: "node_2"
+   links:
+    - activemq
+   tty: true
+   command: bash -c "cd /usr/local/spring && java -jar *.jar"
+activemq:
+  ports:
+    - "8161:8161"
+    - "61616:61616"
+    - "61613:61613"
+  environment:
+    - ACTIVEMQ_ADMIN_LOGIN=admin
+    - ACTIVEMQ_ADMIN_PASSWORD=admin
+    - ACTIVEMQ_USER_LOGIN=guest
+    - ACTIVEMQ_WRITE_PASSWORD=password
+  image: webcenter/activemq
+  container_name: "activemq"
