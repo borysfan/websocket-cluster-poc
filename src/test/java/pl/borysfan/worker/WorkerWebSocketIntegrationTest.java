@@ -3,8 +3,10 @@ package pl.borysfan.worker;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.messaging.simp.user.SimpUserRegistry;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.borysfan.socket.client.*;
 
@@ -19,6 +21,9 @@ public class WorkerWebSocketIntegrationTest {
 
     @LocalServerPort
     private int port;
+
+    @Autowired
+    private SimpUserRegistry simpUserRegistry;
 
     @Test
     public void shouldNotifyAllUsers() throws InterruptedException {
@@ -55,6 +60,7 @@ public class WorkerWebSocketIntegrationTest {
                     )
             );
             Assert.assertTrue(countDownLatch.await(5, TimeUnit.SECONDS));
+            Assert.assertNotNull(simpUserRegistry.getUser("user"));
         } finally {
             subscription.close();
         }

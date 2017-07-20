@@ -1,6 +1,5 @@
 package pl.borysfan.worker;
 
-import javafx.concurrent.Worker;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,9 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.simp.stomp.StompFrameHandler;
-import org.springframework.messaging.simp.stomp.StompHeaders;
-import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 import pl.borysfan.socket.client.Credentials;
@@ -20,7 +16,6 @@ import pl.borysfan.socket.client.Subscription;
 import pl.borysfan.socket.client.SynchronizationHandler;
 import pl.borysfan.socket.client.TestWebSocketClient;
 
-import java.lang.reflect.Type;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -29,6 +24,7 @@ import java.util.concurrent.TimeUnit;
 public class WorkerRestIntegrationTest {
     @Autowired
     private RestTemplate restTemplate;
+
 
     private Credentials credentials = new Credentials("user", "test");
 
