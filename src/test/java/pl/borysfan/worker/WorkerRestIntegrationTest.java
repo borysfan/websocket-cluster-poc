@@ -96,20 +96,4 @@ public class WorkerRestIntegrationTest {
         return restTemplate.exchange("http://localhost:" + port + url, HttpMethod.GET, new HttpEntity<>(credentials.httpHeaders()), clazz);
     }
 
-    private static class WorkerDtoHandler implements StompFrameHandler {
-
-        @Override
-        public Type getPayloadType(StompHeaders headers) {
-            return WorkerDto.class;
-        }
-
-        @Override
-        public void handleFrame(StompHeaders headers, Object payload) {
-            WorkerDto workerDto = (WorkerDto) payload;
-            System.out.println(workerDto);
-        }
-
-    }
-
-
 }
